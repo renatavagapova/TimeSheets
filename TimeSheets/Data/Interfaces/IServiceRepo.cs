@@ -4,11 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using TimeSheets.Models;
 
-namespace TimeSheets
+namespace TimeSheets.Data.Interfaces
 {
-    public interface IPersonsDB
+    public interface IServiceRepo : IRepoBase<Service>
     {
-        List<Person> Persons { get; set; }
-        int GetCount();
     }
 }

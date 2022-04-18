@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using TimeSheets.Data;
 using TimeSheets.Data.Implementation;
 using TimeSheets.Data.Interfaces;
 using TimeSheets.Domain.Implementation;
@@ -23,9 +25,18 @@ namespace TimeSheets
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IPersonRepo, PersonRepo>();
-            services.AddScoped<IPersonsManager, PersonsManager>();
-            services.AddSingleton<IPersonsDB, PersonsDB>();
+            services.AddDbContext<TimesheetDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<ISheetRepo, SheetRepo>();
+            services.AddScoped<IContractRepo, ContractRepo>();
+            services.AddScoped<IUserRepo, UserRepo>();
+            services.AddScoped<IEmployeeRepo, EmployeeRepo>();
+            services.AddScoped<IContractManager, ContractManager>();
+            services.AddScoped<ISheetManager, SheetManager>();
+            services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IEmployeeManager, EmployeeManager>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
