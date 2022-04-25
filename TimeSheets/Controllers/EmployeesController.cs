@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace TimeSheets.Controllers
         }
 
         /// <summary> Возвращает запись сотрудника </summary>
+        [Authorize(Roles = "admin")]
         [HttpGet("employee/")]
         public IActionResult Get([FromQuery] Guid id)
         {
@@ -29,6 +31,7 @@ namespace TimeSheets.Controllers
         }
 
         /// <summary> Возвращает все записи сотрудников </summary>
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> GetItems()
         {
@@ -37,6 +40,7 @@ namespace TimeSheets.Controllers
         }
 
         /// <summary> Создает запись сотрудника </summary>
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] EmployeeRequest employee)
         {
@@ -45,6 +49,7 @@ namespace TimeSheets.Controllers
         }
 
         /// <summary> Обновляет запись сотрудника </summary>
+        [Authorize(Roles = "admin")]
         [HttpPut("update/")]
         public async Task<IActionResult> Update([FromQuery] Guid id, [FromBody] EmployeeRequest employee)
         {
@@ -53,6 +58,7 @@ namespace TimeSheets.Controllers
         }
 
         /// <summary> Обновляет запись сотрудника </summary>
+        [Authorize(Roles = "admin")]
         [HttpDelete("delete/")]
         public async Task<IActionResult> Delete([FromQuery] Guid id, [FromBody] EmployeeRequest employee)
         {

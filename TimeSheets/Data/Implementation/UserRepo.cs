@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TimeSheets.Data.Interfaces;
 using TimeSheets.Models;
 using Microsoft.EntityFrameworkCore;
+using TimeSheets.Data.Ef;
 
 namespace TimeSheets.Data.Implementation
 {
@@ -48,6 +49,20 @@ namespace TimeSheets.Data.Implementation
                 _context.Users.Remove(user);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<User> GetByLoginAndPasswordHash(string login, byte[] passwordHash)
+        {
+            return
+                await _context.Users
+                    .Where(x => x.Username == login && x.PasswordHash == passwordHash)
+                    .FirstOrDefaultAsync();
+        }
+
+        public async Task Create(User user)
+        {
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
         }
     }
 }

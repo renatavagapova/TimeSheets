@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace TimeSheets.Controllers
         }
 
         /// <summary> Возвращает запись табеля </summary>
+        [Authorize(Roles = "user")]
         [HttpGet("sheets/")]
         public IActionResult Get([FromQuery] Guid id)
         {
@@ -30,6 +32,7 @@ namespace TimeSheets.Controllers
         }
 
         /// <summary> Возвращает все записи табеля </summary>
+        [Authorize(Roles = "user")]
         [HttpGet]
         public async Task<IActionResult> GetItems()
         {
@@ -38,6 +41,7 @@ namespace TimeSheets.Controllers
         }
 
         /// <summary> Создает запись табеля </summary>
+        [Authorize(Roles = "user")]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] SheetRequest sheet)
         {
@@ -51,6 +55,7 @@ namespace TimeSheets.Controllers
         }
 
         /// <summary> Обновляет запись табеля </summary>
+        [Authorize(Roles = "user")]
         [HttpPut("update/")]
         public async Task<IActionResult> Update([FromQuery] Guid id, [FromBody] SheetRequest sheet)
         {

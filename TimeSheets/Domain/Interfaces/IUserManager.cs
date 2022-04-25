@@ -11,7 +11,8 @@ namespace TimeSheets.Domain.Interfaces
     {
         Task<User> GetItem(Guid id);
         Task<IEnumerable<User>> GetItems();
-        Task<Guid> Create(UserRequest user);
+        Task<Guid> Create(CreateUserRequest user);
         Task Update(Guid id, UserRequest userRequest);
+        Task<User> GetUser(LoginRequest request);
     }
 }
