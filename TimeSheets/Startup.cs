@@ -3,11 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using TimeSheets.Data.Implementation;
-using TimeSheets.Data.Interfaces;
-using TimeSheets.Domain.Implementation;
-using TimeSheets.Domain.Interfaces;
+using TimeSheets.Infrastructure.Extensions;
+using FluentValidation.AspNetCore;
 
 namespace TimeSheets
 {
@@ -23,14 +20,13 @@ namespace TimeSheets
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IPersonRepo, PersonRepo>();
-            services.AddScoped<IPersonsManager, PersonsManager>();
-            services.AddSingleton<IPersonsDB, PersonsDB>();
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TimeSheets", Version = "v1" });
-            });
+            services.ConfigureDbContext(Configuration);
+            services.ConfigureAuthentication(Configuration);
+            services.ConfigureRepositories();
+            services.ConfigureDomainManagers();
+            services.ConfigureBackendSwagger();
+            services.ConfigureValidation();
+            services.AddControllers().AddFluentValidation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +43,7 @@ namespace TimeSheets
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
