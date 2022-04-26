@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TimeSheets.Data.Ef;
 using TimeSheets.Data.Implementation;
 using TimeSheets.Data.Interfaces;
 using TimeSheets.Domain.Implementation;
 using TimeSheets.Domain.Interfaces;
+using TimeSheets.Infrastructure.Validation;
+using TimeSheets.Models.Dto;
 using TimeSheets.Models.Dto.Authentication;
 
 namespace TimeSheets.Infrastructure.Extensions
@@ -92,6 +92,11 @@ namespace TimeSheets.Infrastructure.Extensions
                     }
                 });
             });
+        }
+
+        public static void ConfigureValidation(this IServiceCollection services)
+        {
+            services.AddTransient<IValidator<SheetRequest>, SheetRequestValidator>();
         }
     }
 }

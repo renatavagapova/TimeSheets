@@ -1,17 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using TimeSheets.Data;
-using TimeSheets.Data.Ef;
-using TimeSheets.Data.Implementation;
-using TimeSheets.Data.Interfaces;
-using TimeSheets.Domain.Implementation;
-using TimeSheets.Domain.Interfaces;
 using TimeSheets.Infrastructure.Extensions;
+using FluentValidation.AspNetCore;
 
 namespace TimeSheets
 {
@@ -32,7 +25,8 @@ namespace TimeSheets
             services.ConfigureRepositories();
             services.ConfigureDomainManagers();
             services.ConfigureBackendSwagger();
-            services.AddControllers();
+            services.ConfigureValidation();
+            services.AddControllers().AddFluentValidation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

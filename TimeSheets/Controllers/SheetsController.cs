@@ -11,7 +11,7 @@ namespace TimeSheets.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class SheetsController :  ControllerBase
+    public class SheetsController : TimesheetsBaseController
     {
         private readonly IContractManager _contractManager;
         private readonly ISheetManager _sheetManager;
