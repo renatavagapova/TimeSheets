@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TimeSheets.Data.Ef.Configurations;
 using TimeSheets.Models;
+using TimeSheets.Models.Entities;
 
 namespace TimeSheets.Data.Ef
 {
@@ -20,6 +21,7 @@ namespace TimeSheets.Data.Ef
         public DbSet<Service> Services { get; set; }
         public DbSet<Sheet> Sheets { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
 
         public DbSet<RefreshToken> RefreshToken { get; set; }
 

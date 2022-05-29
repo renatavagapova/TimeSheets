@@ -8,11 +8,11 @@ using System;
 using TimeSheets.Data.Ef;
 using TimeSheets.Data.Implementation;
 using TimeSheets.Data.Interfaces;
-using TimeSheets.Domain.Implementation;
-using TimeSheets.Domain.Interfaces;
 using TimeSheets.Infrastructure.Validation;
 using TimeSheets.Models.Dto;
 using TimeSheets.Models.Dto.Authentication;
+using TimeSheets.Domain.Managers.Implementation;
+using TimeSheets.Domain.Managers.Interfaces;
 
 namespace TimeSheets.Infrastructure.Extensions
 {

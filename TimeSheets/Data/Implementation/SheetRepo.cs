@@ -6,6 +6,7 @@ using TimeSheets.Data.Interfaces;
 using TimeSheets.Models;
 using Microsoft.EntityFrameworkCore;
 using TimeSheets.Data.Ef;
+using TimeSheets.Models.Entities;
 
 namespace TimeSheets.Data.Implementation
 {
@@ -27,7 +28,9 @@ namespace TimeSheets.Data.Implementation
 
         public async Task<IEnumerable<Sheet>> GetItems()
         {
-            return await _context.Sheets.ToListAsync();
+            var result = await _context.Sheets.ToListAsync();
+
+            return result;
         }
 
         public async Task Add(Sheet item)
@@ -40,6 +43,16 @@ namespace TimeSheets.Data.Implementation
         {
             _context.Sheets.Update(item);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Sheet>> GetItemsForInvoice(Guid contractId, DateTime dateStart, DateTime dateEnd)
+        {
+            var sheets = await _context.Sheets
+                .Where(x => x.ContractId == contractId)
+                .Where(x => x.Date >= dateStart && x.Date <= dateEnd)
+                .ToListAsync();
+
+            return sheets;
         }
     }
 }

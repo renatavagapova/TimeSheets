@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TimeSheets.Domain.Interfaces
+namespace TimeSheets.Domain.Managers.Interfaces
 {
     public interface IContractManager
     {
