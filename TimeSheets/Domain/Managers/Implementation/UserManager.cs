@@ -5,12 +5,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using TimeSheets.Data.Interfaces;
-using TimeSheets.Domain.Interfaces;
+using TimeSheets.Domain.Managers.Interfaces;
 using TimeSheets.Infrastructure.Extensions;
 using TimeSheets.Models;
 using TimeSheets.Models.Dto;
+using TimeSheets.Models.Entities;
 
-namespace TimeSheets.Domain.Implementation
+namespace TimeSheets.Domain.Managers.Implementation
 {
     public class UserManager : IUserManager
     {

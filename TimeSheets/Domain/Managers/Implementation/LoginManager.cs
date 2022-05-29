@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using TimeSheets.Domain.Interfaces;
+using TimeSheets.Domain.Managers.Interfaces;
 using TimeSheets.Infrastructure.Extensions;
 using TimeSheets.Models;
 using TimeSheets.Models.Dto;
 using TimeSheets.Models.Dto.Authentication;
+using TimeSheets.Models.Entities;
 
-namespace TimeSheets.Domain.Implementation
+namespace TimeSheets.Domain.Managers.Implementation
 {
     public class LoginManager : ILoginManager
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TimeSheets.Models;
+using TimeSheets.Models.Entities;
 
 namespace TimeSheets.Data.Ef.Configurations
 {
